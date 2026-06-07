@@ -18,7 +18,7 @@ tokens = [
 ]
 
 reserved = {
-    'dispositivo': 'DISPOSITIVO_KW',
+    'dispositivo:': 'DISPOSITIVO_KW',
     'set': 'SET',
     'se': 'SE',
     'entao': 'ENTAO',
@@ -65,8 +65,8 @@ def t_NUM(t):
     return t
 
 # Identificadores complexos
-def t_IDENTIFIES(t):
-    r'enviar\salerta|para\stodos:|dispositivo:|=[=]?|!=|[a-zA-Z][a-zA-Z0-9]*'
+def t_IDENTIFIER(t):
+    r'enviar\salerta|para\stodos:|dispositivo:|[a-zA-Z][a-zA-Z0-9]*'
 
     if t.value in reserved:
         t.type = reserved[t.value]

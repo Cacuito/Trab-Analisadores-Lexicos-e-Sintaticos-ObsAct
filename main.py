@@ -17,7 +17,7 @@ def transpile(input_file, output_file):
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(final_code)
             
-        print(f"🎉 Sucesso! Arquivo '{input_file}' transpilado para '{output_file}'.")
+        print(f"Sucesso! Arquivo '{input_file}' transpilado para '{output_file}'.")
         
     except FileNotFoundError:
         print(f"Erro: O arquivo '{input_file}' não foi encontrado.")

@@ -1,0 +1,12 @@
+dispositivo: {Termometro, temperatura}
+dispositivo: {ventilador}
+dispositivo: {celular}
+
+set temperatura = 40.
+
+se temperatura > 30 entao
+    set estado = verificar(ventilador).
+    se estado == 1 entao
+        enviar alerta ("Janela fechada e calor em", temperatura) para todos: ventilador, celular.
+    .
+.

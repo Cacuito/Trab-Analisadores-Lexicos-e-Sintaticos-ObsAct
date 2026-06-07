@@ -1,0 +1,802 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> devices cmds
+Rule 2     devices -> device devices
+Rule 3     devices -> device
+Rule 4     id_any -> NAMEDEVICE
+Rule 5     id_any -> OBSERVATION
+Rule 6     device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE
+Rule 7     device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE
+Rule 8     cmds -> cmd PONTO cmds
+Rule 9     cmds -> cmd PONTO
+Rule 10    cmd -> attrib
+Rule 11    cmd -> obsact
+Rule 12    cmd -> act
+Rule 13    attrib -> SET id_any IGUAL var
+Rule 14    attrib -> SET id_any IGUAL actexecute
+Rule 15    var -> NUM
+Rule 16    var -> BOOL
+Rule 17    var -> NAMEDEVICE
+Rule 18    var -> OBSERVATION
+Rule 19    obsact -> SE obs ENTAO cmds
+Rule 20    obsact -> SE obs ENTAO cmds SENAO cmds
+Rule 21    obs -> id_any OPLOGIC var
+Rule 22    obs -> id_any OPLOGIC var AND obs
+Rule 23    act -> ACTION NAMEDEVICE
+Rule 24    act -> actalert
+Rule 25    actexecute -> VERIFICAR ABRE_PARENTESE NAMEDEVICE FECHA_PARENTESE
+Rule 26    ACTION -> LIGAR
+Rule 27    ACTION -> DESLIGAR
+Rule 28    actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE
+Rule 29    actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+Rule 30    actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist
+Rule 31    actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+Rule 32    devicelist -> NAMEDEVICE VIRGULA devicelist
+Rule 33    devicelist -> NAMEDEVICE
+
+Terminals, with rules where they appear
+
+ABRE_CHAVE           : 6 7
+ABRE_PARENTESE       : 25 28 29 30 31
+AND                  : 22
+BOOL                 : 16
+DESLIGAR             : 27
+DISPOSITIVO_KW       : 6 7
+ENTAO                : 19 20
+ENVIAR_ALERTA        : 28 29 30 31
+FECHA_CHAVE          : 6 7
+FECHA_PARENTESE      : 25 28 29 30 31
+IGUAL                : 13 14
+LIGAR                : 26
+MSG                  : 28 29 30 31
+NAMEDEVICE           : 4 6 7 17 23 25 28 29 32 33
+NUM                  : 15
+OBSERVATION          : 5 18
+OPLOGIC              : 21 22
+PARA_TODOS           : 30 31
+PONTO                : 8 9
+SE                   : 19 20
+SENAO                : 20
+SET                  : 13 14
+VERIFICAR            : 25
+VIRGULA              : 7 29 31 32
+error                : 
+
+Nonterminals, with rules where they appear
+
+ACTION               : 23
+act                  : 12
+actalert             : 24
+actexecute           : 14
+attrib               : 10
+cmd                  : 8 9
+cmds                 : 1 8 19 20 20
+device               : 2 3
+devicelist           : 30 31 32
+devices              : 1 2
+id_any               : 7 13 14 21 22 29 31
+obs                  : 19 20 22
+obsact               : 11
+program              : 0
+var                  : 13 21 22
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . devices cmds
+    (2) devices -> . device devices
+    (3) devices -> . device
+    (6) device -> . DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE
+    (7) device -> . DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE
+
+    DISPOSITIVO_KW  shift and go to state 4
+
+    program                        shift and go to state 1
+    devices                        shift and go to state 2
+    device                         shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> devices . cmds
+    (8) cmds -> . cmd PONTO cmds
+    (9) cmds -> . cmd PONTO
+    (10) cmd -> . attrib
+    (11) cmd -> . obsact
+    (12) cmd -> . act
+    (13) attrib -> . SET id_any IGUAL var
+    (14) attrib -> . SET id_any IGUAL actexecute
+    (19) obsact -> . SE obs ENTAO cmds
+    (20) obsact -> . SE obs ENTAO cmds SENAO cmds
+    (23) act -> . ACTION NAMEDEVICE
+    (24) act -> . actalert
+    (26) ACTION -> . LIGAR
+    (27) ACTION -> . DESLIGAR
+    (28) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE
+    (29) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+    (30) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist
+    (31) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+
+    SET             shift and go to state 10
+    SE              shift and go to state 11
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR_ALERTA   shift and go to state 16
+
+    cmds                           shift and go to state 5
+    cmd                            shift and go to state 6
+    attrib                         shift and go to state 7
+    obsact                         shift and go to state 8
+    act                            shift and go to state 9
+    ACTION                         shift and go to state 12
+    actalert                       shift and go to state 13
+
+state 3
+
+    (2) devices -> device . devices
+    (3) devices -> device .
+    (2) devices -> . device devices
+    (3) devices -> . device
+    (6) device -> . DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE
+    (7) device -> . DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE
+
+    SET             reduce using rule 3 (devices -> device .)
+    SE              reduce using rule 3 (devices -> device .)
+    LIGAR           reduce using rule 3 (devices -> device .)
+    DESLIGAR        reduce using rule 3 (devices -> device .)
+    ENVIAR_ALERTA   reduce using rule 3 (devices -> device .)
+    DISPOSITIVO_KW  shift and go to state 4
+
+    device                         shift and go to state 3
+    devices                        shift and go to state 17
+
+state 4
+
+    (6) device -> DISPOSITIVO_KW . ABRE_CHAVE NAMEDEVICE FECHA_CHAVE
+    (7) device -> DISPOSITIVO_KW . ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE
+
+    ABRE_CHAVE      shift and go to state 18
+
+
+state 5
+
+    (1) program -> devices cmds .
+
+    $end            reduce using rule 1 (program -> devices cmds .)
+
+
+state 6
+
+    (8) cmds -> cmd . PONTO cmds
+    (9) cmds -> cmd . PONTO
+
+    PONTO           shift and go to state 19
+
+
+state 7
+
+    (10) cmd -> attrib .
+
+    PONTO           reduce using rule 10 (cmd -> attrib .)
+
+
+state 8
+
+    (11) cmd -> obsact .
+
+    PONTO           reduce using rule 11 (cmd -> obsact .)
+
+
+state 9
+
+    (12) cmd -> act .
+
+    PONTO           reduce using rule 12 (cmd -> act .)
+
+
+state 10
+
+    (13) attrib -> SET . id_any IGUAL var
+    (14) attrib -> SET . id_any IGUAL actexecute
+    (4) id_any -> . NAMEDEVICE
+    (5) id_any -> . OBSERVATION
+
+    NAMEDEVICE      shift and go to state 21
+    OBSERVATION     shift and go to state 22
+
+    id_any                         shift and go to state 20
+
+state 11
+
+    (19) obsact -> SE . obs ENTAO cmds
+    (20) obsact -> SE . obs ENTAO cmds SENAO cmds
+    (21) obs -> . id_any OPLOGIC var
+    (22) obs -> . id_any OPLOGIC var AND obs
+    (4) id_any -> . NAMEDEVICE
+    (5) id_any -> . OBSERVATION
+
+    NAMEDEVICE      shift and go to state 21
+    OBSERVATION     shift and go to state 22
+
+    obs                            shift and go to state 23
+    id_any                         shift and go to state 24
+
+state 12
+
+    (23) act -> ACTION . NAMEDEVICE
+
+    NAMEDEVICE      shift and go to state 25
+
+
+state 13
+
+    (24) act -> actalert .
+
+    PONTO           reduce using rule 24 (act -> actalert .)
+
+
+state 14
+
+    (26) ACTION -> LIGAR .
+
+    NAMEDEVICE      reduce using rule 26 (ACTION -> LIGAR .)
+
+
+state 15
+
+    (27) ACTION -> DESLIGAR .
+
+    NAMEDEVICE      reduce using rule 27 (ACTION -> DESLIGAR .)
+
+
+state 16
+
+    (28) actalert -> ENVIAR_ALERTA . ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE
+    (29) actalert -> ENVIAR_ALERTA . ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+    (30) actalert -> ENVIAR_ALERTA . ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist
+    (31) actalert -> ENVIAR_ALERTA . ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+
+    ABRE_PARENTESE  shift and go to state 26
+
+
+state 17
+
+    (2) devices -> device devices .
+
+    SET             reduce using rule 2 (devices -> device devices .)
+    SE              reduce using rule 2 (devices -> device devices .)
+    LIGAR           reduce using rule 2 (devices -> device devices .)
+    DESLIGAR        reduce using rule 2 (devices -> device devices .)
+    ENVIAR_ALERTA   reduce using rule 2 (devices -> device devices .)
+
+
+state 18
+
+    (6) device -> DISPOSITIVO_KW ABRE_CHAVE . NAMEDEVICE FECHA_CHAVE
+    (7) device -> DISPOSITIVO_KW ABRE_CHAVE . NAMEDEVICE VIRGULA id_any FECHA_CHAVE
+
+    NAMEDEVICE      shift and go to state 27
+
+
+state 19
+
+    (8) cmds -> cmd PONTO . cmds
+    (9) cmds -> cmd PONTO .
+    (8) cmds -> . cmd PONTO cmds
+    (9) cmds -> . cmd PONTO
+    (10) cmd -> . attrib
+    (11) cmd -> . obsact
+    (12) cmd -> . act
+    (13) attrib -> . SET id_any IGUAL var
+    (14) attrib -> . SET id_any IGUAL actexecute
+    (19) obsact -> . SE obs ENTAO cmds
+    (20) obsact -> . SE obs ENTAO cmds SENAO cmds
+    (23) act -> . ACTION NAMEDEVICE
+    (24) act -> . actalert
+    (26) ACTION -> . LIGAR
+    (27) ACTION -> . DESLIGAR
+    (28) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE
+    (29) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+    (30) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist
+    (31) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+
+    $end            reduce using rule 9 (cmds -> cmd PONTO .)
+    SENAO           reduce using rule 9 (cmds -> cmd PONTO .)
+    PONTO           reduce using rule 9 (cmds -> cmd PONTO .)
+    SET             shift and go to state 10
+    SE              shift and go to state 11
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR_ALERTA   shift and go to state 16
+
+    cmd                            shift and go to state 6
+    cmds                           shift and go to state 28
+    attrib                         shift and go to state 7
+    obsact                         shift and go to state 8
+    act                            shift and go to state 9
+    ACTION                         shift and go to state 12
+    actalert                       shift and go to state 13
+
+state 20
+
+    (13) attrib -> SET id_any . IGUAL var
+    (14) attrib -> SET id_any . IGUAL actexecute
+
+    IGUAL           shift and go to state 29
+
+
+state 21
+
+    (4) id_any -> NAMEDEVICE .
+
+    IGUAL           reduce using rule 4 (id_any -> NAMEDEVICE .)
+    OPLOGIC         reduce using rule 4 (id_any -> NAMEDEVICE .)
+    FECHA_CHAVE     reduce using rule 4 (id_any -> NAMEDEVICE .)
+    FECHA_PARENTESE reduce using rule 4 (id_any -> NAMEDEVICE .)
+
+
+state 22
+
+    (5) id_any -> OBSERVATION .
+
+    IGUAL           reduce using rule 5 (id_any -> OBSERVATION .)
+    OPLOGIC         reduce using rule 5 (id_any -> OBSERVATION .)
+    FECHA_CHAVE     reduce using rule 5 (id_any -> OBSERVATION .)
+    FECHA_PARENTESE reduce using rule 5 (id_any -> OBSERVATION .)
+
+
+state 23
+
+    (19) obsact -> SE obs . ENTAO cmds
+    (20) obsact -> SE obs . ENTAO cmds SENAO cmds
+
+    ENTAO           shift and go to state 30
+
+
+state 24
+
+    (21) obs -> id_any . OPLOGIC var
+    (22) obs -> id_any . OPLOGIC var AND obs
+
+    OPLOGIC         shift and go to state 31
+
+
+state 25
+
+    (23) act -> ACTION NAMEDEVICE .
+
+    PONTO           reduce using rule 23 (act -> ACTION NAMEDEVICE .)
+
+
+state 26
+
+    (28) actalert -> ENVIAR_ALERTA ABRE_PARENTESE . MSG FECHA_PARENTESE NAMEDEVICE
+    (29) actalert -> ENVIAR_ALERTA ABRE_PARENTESE . MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+    (30) actalert -> ENVIAR_ALERTA ABRE_PARENTESE . MSG FECHA_PARENTESE PARA_TODOS devicelist
+    (31) actalert -> ENVIAR_ALERTA ABRE_PARENTESE . MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+
+    MSG             shift and go to state 32
+
+
+state 27
+
+    (6) device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE . FECHA_CHAVE
+    (7) device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE . VIRGULA id_any FECHA_CHAVE
+
+    FECHA_CHAVE     shift and go to state 33
+    VIRGULA         shift and go to state 34
+
+
+state 28
+
+    (8) cmds -> cmd PONTO cmds .
+
+    $end            reduce using rule 8 (cmds -> cmd PONTO cmds .)
+    SENAO           reduce using rule 8 (cmds -> cmd PONTO cmds .)
+    PONTO           reduce using rule 8 (cmds -> cmd PONTO cmds .)
+
+
+state 29
+
+    (13) attrib -> SET id_any IGUAL . var
+    (14) attrib -> SET id_any IGUAL . actexecute
+    (15) var -> . NUM
+    (16) var -> . BOOL
+    (17) var -> . NAMEDEVICE
+    (18) var -> . OBSERVATION
+    (25) actexecute -> . VERIFICAR ABRE_PARENTESE NAMEDEVICE FECHA_PARENTESE
+
+    NUM             shift and go to state 37
+    BOOL            shift and go to state 38
+    NAMEDEVICE      shift and go to state 39
+    OBSERVATION     shift and go to state 40
+    VERIFICAR       shift and go to state 41
+
+    var                            shift and go to state 35
+    actexecute                     shift and go to state 36
+
+state 30
+
+    (19) obsact -> SE obs ENTAO . cmds
+    (20) obsact -> SE obs ENTAO . cmds SENAO cmds
+    (8) cmds -> . cmd PONTO cmds
+    (9) cmds -> . cmd PONTO
+    (10) cmd -> . attrib
+    (11) cmd -> . obsact
+    (12) cmd -> . act
+    (13) attrib -> . SET id_any IGUAL var
+    (14) attrib -> . SET id_any IGUAL actexecute
+    (19) obsact -> . SE obs ENTAO cmds
+    (20) obsact -> . SE obs ENTAO cmds SENAO cmds
+    (23) act -> . ACTION NAMEDEVICE
+    (24) act -> . actalert
+    (26) ACTION -> . LIGAR
+    (27) ACTION -> . DESLIGAR
+    (28) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE
+    (29) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+    (30) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist
+    (31) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+
+    SET             shift and go to state 10
+    SE              shift and go to state 11
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR_ALERTA   shift and go to state 16
+
+    cmds                           shift and go to state 42
+    cmd                            shift and go to state 6
+    attrib                         shift and go to state 7
+    obsact                         shift and go to state 8
+    act                            shift and go to state 9
+    ACTION                         shift and go to state 12
+    actalert                       shift and go to state 13
+
+state 31
+
+    (21) obs -> id_any OPLOGIC . var
+    (22) obs -> id_any OPLOGIC . var AND obs
+    (15) var -> . NUM
+    (16) var -> . BOOL
+    (17) var -> . NAMEDEVICE
+    (18) var -> . OBSERVATION
+
+    NUM             shift and go to state 37
+    BOOL            shift and go to state 38
+    NAMEDEVICE      shift and go to state 39
+    OBSERVATION     shift and go to state 40
+
+    var                            shift and go to state 43
+
+state 32
+
+    (28) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG . FECHA_PARENTESE NAMEDEVICE
+    (29) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG . VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+    (30) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG . FECHA_PARENTESE PARA_TODOS devicelist
+    (31) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG . VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+
+    FECHA_PARENTESE shift and go to state 44
+    VIRGULA         shift and go to state 45
+
+
+state 33
+
+    (6) device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE .
+
+    DISPOSITIVO_KW  reduce using rule 6 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE .)
+    SET             reduce using rule 6 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE .)
+    SE              reduce using rule 6 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE .)
+    LIGAR           reduce using rule 6 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE .)
+    DESLIGAR        reduce using rule 6 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE .)
+    ENVIAR_ALERTA   reduce using rule 6 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE FECHA_CHAVE .)
+
+
+state 34
+
+    (7) device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA . id_any FECHA_CHAVE
+    (4) id_any -> . NAMEDEVICE
+    (5) id_any -> . OBSERVATION
+
+    NAMEDEVICE      shift and go to state 21
+    OBSERVATION     shift and go to state 22
+
+    id_any                         shift and go to state 46
+
+state 35
+
+    (13) attrib -> SET id_any IGUAL var .
+
+    PONTO           reduce using rule 13 (attrib -> SET id_any IGUAL var .)
+
+
+state 36
+
+    (14) attrib -> SET id_any IGUAL actexecute .
+
+    PONTO           reduce using rule 14 (attrib -> SET id_any IGUAL actexecute .)
+
+
+state 37
+
+    (15) var -> NUM .
+
+    PONTO           reduce using rule 15 (var -> NUM .)
+    AND             reduce using rule 15 (var -> NUM .)
+    ENTAO           reduce using rule 15 (var -> NUM .)
+
+
+state 38
+
+    (16) var -> BOOL .
+
+    PONTO           reduce using rule 16 (var -> BOOL .)
+    AND             reduce using rule 16 (var -> BOOL .)
+    ENTAO           reduce using rule 16 (var -> BOOL .)
+
+
+state 39
+
+    (17) var -> NAMEDEVICE .
+
+    PONTO           reduce using rule 17 (var -> NAMEDEVICE .)
+    AND             reduce using rule 17 (var -> NAMEDEVICE .)
+    ENTAO           reduce using rule 17 (var -> NAMEDEVICE .)
+
+
+state 40
+
+    (18) var -> OBSERVATION .
+
+    PONTO           reduce using rule 18 (var -> OBSERVATION .)
+    AND             reduce using rule 18 (var -> OBSERVATION .)
+    ENTAO           reduce using rule 18 (var -> OBSERVATION .)
+
+
+state 41
+
+    (25) actexecute -> VERIFICAR . ABRE_PARENTESE NAMEDEVICE FECHA_PARENTESE
+
+    ABRE_PARENTESE  shift and go to state 47
+
+
+state 42
+
+    (19) obsact -> SE obs ENTAO cmds .
+    (20) obsact -> SE obs ENTAO cmds . SENAO cmds
+
+    PONTO           reduce using rule 19 (obsact -> SE obs ENTAO cmds .)
+    SENAO           shift and go to state 48
+
+
+state 43
+
+    (21) obs -> id_any OPLOGIC var .
+    (22) obs -> id_any OPLOGIC var . AND obs
+
+    ENTAO           reduce using rule 21 (obs -> id_any OPLOGIC var .)
+    AND             shift and go to state 49
+
+
+state 44
+
+    (28) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE . NAMEDEVICE
+    (30) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE . PARA_TODOS devicelist
+
+    NAMEDEVICE      shift and go to state 50
+    PARA_TODOS      shift and go to state 51
+
+
+state 45
+
+    (29) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA . id_any FECHA_PARENTESE NAMEDEVICE
+    (31) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA . id_any FECHA_PARENTESE PARA_TODOS devicelist
+    (4) id_any -> . NAMEDEVICE
+    (5) id_any -> . OBSERVATION
+
+    NAMEDEVICE      shift and go to state 21
+    OBSERVATION     shift and go to state 22
+
+    id_any                         shift and go to state 52
+
+state 46
+
+    (7) device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any . FECHA_CHAVE
+
+    FECHA_CHAVE     shift and go to state 53
+
+
+state 47
+
+    (25) actexecute -> VERIFICAR ABRE_PARENTESE . NAMEDEVICE FECHA_PARENTESE
+
+    NAMEDEVICE      shift and go to state 54
+
+
+state 48
+
+    (20) obsact -> SE obs ENTAO cmds SENAO . cmds
+    (8) cmds -> . cmd PONTO cmds
+    (9) cmds -> . cmd PONTO
+    (10) cmd -> . attrib
+    (11) cmd -> . obsact
+    (12) cmd -> . act
+    (13) attrib -> . SET id_any IGUAL var
+    (14) attrib -> . SET id_any IGUAL actexecute
+    (19) obsact -> . SE obs ENTAO cmds
+    (20) obsact -> . SE obs ENTAO cmds SENAO cmds
+    (23) act -> . ACTION NAMEDEVICE
+    (24) act -> . actalert
+    (26) ACTION -> . LIGAR
+    (27) ACTION -> . DESLIGAR
+    (28) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE
+    (29) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE
+    (30) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist
+    (31) actalert -> . ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist
+
+    SET             shift and go to state 10
+    SE              shift and go to state 11
+    LIGAR           shift and go to state 14
+    DESLIGAR        shift and go to state 15
+    ENVIAR_ALERTA   shift and go to state 16
+
+    cmds                           shift and go to state 55
+    cmd                            shift and go to state 6
+    attrib                         shift and go to state 7
+    obsact                         shift and go to state 8
+    act                            shift and go to state 9
+    ACTION                         shift and go to state 12
+    actalert                       shift and go to state 13
+
+state 49
+
+    (22) obs -> id_any OPLOGIC var AND . obs
+    (21) obs -> . id_any OPLOGIC var
+    (22) obs -> . id_any OPLOGIC var AND obs
+    (4) id_any -> . NAMEDEVICE
+    (5) id_any -> . OBSERVATION
+
+    NAMEDEVICE      shift and go to state 21
+    OBSERVATION     shift and go to state 22
+
+    id_any                         shift and go to state 24
+    obs                            shift and go to state 56
+
+state 50
+
+    (28) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE .
+
+    PONTO           reduce using rule 28 (actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE NAMEDEVICE .)
+
+
+state 51
+
+    (30) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS . devicelist
+    (32) devicelist -> . NAMEDEVICE VIRGULA devicelist
+    (33) devicelist -> . NAMEDEVICE
+
+    NAMEDEVICE      shift and go to state 58
+
+    devicelist                     shift and go to state 57
+
+state 52
+
+    (29) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any . FECHA_PARENTESE NAMEDEVICE
+    (31) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any . FECHA_PARENTESE PARA_TODOS devicelist
+
+    FECHA_PARENTESE shift and go to state 59
+
+
+state 53
+
+    (7) device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE .
+
+    DISPOSITIVO_KW  reduce using rule 7 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE .)
+    SET             reduce using rule 7 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE .)
+    SE              reduce using rule 7 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE .)
+    LIGAR           reduce using rule 7 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE .)
+    DESLIGAR        reduce using rule 7 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE .)
+    ENVIAR_ALERTA   reduce using rule 7 (device -> DISPOSITIVO_KW ABRE_CHAVE NAMEDEVICE VIRGULA id_any FECHA_CHAVE .)
+
+
+state 54
+
+    (25) actexecute -> VERIFICAR ABRE_PARENTESE NAMEDEVICE . FECHA_PARENTESE
+
+    FECHA_PARENTESE shift and go to state 60
+
+
+state 55
+
+    (20) obsact -> SE obs ENTAO cmds SENAO cmds .
+
+    PONTO           reduce using rule 20 (obsact -> SE obs ENTAO cmds SENAO cmds .)
+
+
+state 56
+
+    (22) obs -> id_any OPLOGIC var AND obs .
+
+    ENTAO           reduce using rule 22 (obs -> id_any OPLOGIC var AND obs .)
+
+
+state 57
+
+    (30) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist .
+
+    PONTO           reduce using rule 30 (actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG FECHA_PARENTESE PARA_TODOS devicelist .)
+
+
+state 58
+
+    (32) devicelist -> NAMEDEVICE . VIRGULA devicelist
+    (33) devicelist -> NAMEDEVICE .
+
+    VIRGULA         shift and go to state 61
+    PONTO           reduce using rule 33 (devicelist -> NAMEDEVICE .)
+
+
+state 59
+
+    (29) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE . NAMEDEVICE
+    (31) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE . PARA_TODOS devicelist
+
+    NAMEDEVICE      shift and go to state 62
+    PARA_TODOS      shift and go to state 63
+
+
+state 60
+
+    (25) actexecute -> VERIFICAR ABRE_PARENTESE NAMEDEVICE FECHA_PARENTESE .
+
+    PONTO           reduce using rule 25 (actexecute -> VERIFICAR ABRE_PARENTESE NAMEDEVICE FECHA_PARENTESE .)
+
+
+state 61
+
+    (32) devicelist -> NAMEDEVICE VIRGULA . devicelist
+    (32) devicelist -> . NAMEDEVICE VIRGULA devicelist
+    (33) devicelist -> . NAMEDEVICE
+
+    NAMEDEVICE      shift and go to state 58
+
+    devicelist                     shift and go to state 64
+
+state 62
+
+    (29) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE .
+
+    PONTO           reduce using rule 29 (actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE NAMEDEVICE .)
+
+
+state 63
+
+    (31) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS . devicelist
+    (32) devicelist -> . NAMEDEVICE VIRGULA devicelist
+    (33) devicelist -> . NAMEDEVICE
+
+    NAMEDEVICE      shift and go to state 58
+
+    devicelist                     shift and go to state 65
+
+state 64
+
+    (32) devicelist -> NAMEDEVICE VIRGULA devicelist .
+
+    PONTO           reduce using rule 32 (devicelist -> NAMEDEVICE VIRGULA devicelist .)
+
+
+state 65
+
+    (31) actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist .
+
+    PONTO           reduce using rule 31 (actalert -> ENVIAR_ALERTA ABRE_PARENTESE MSG VIRGULA id_any FECHA_PARENTESE PARA_TODOS devicelist .)
+

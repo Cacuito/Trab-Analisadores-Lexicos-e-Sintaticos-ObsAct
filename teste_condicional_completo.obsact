@@ -1,0 +1,16 @@
+dispositivo: {higrometro, umidade}
+dispositivo: {umidificador, potencia}
+
+set umidade = 35.
+
+se umidade < 40 entao
+    ligar umidificador.
+    se umidade < 20 entao
+        set potencia = 100.
+    senao
+        set potencia = 150.
+    .
+senao
+    desligar umidificador.
+    set potencia = 0.
+.

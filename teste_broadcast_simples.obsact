@@ -1,0 +1,5 @@
+dispositivo: {arcondicionado}
+dispositivo: {aquecedor}
+dispositivo: {painelalerta}
+
+enviar alerta ("Alerta do sistema: Evacuacao imediata do prédio") para todos: arcondicionado, aquecedor, painelalerta.

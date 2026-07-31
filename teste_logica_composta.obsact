@@ -1,0 +1,10 @@
+dispositivo: {sensormovimento, movimento}
+dispositivo: {sensorluminosidade, luz}
+dispositivo: {lampada}
+
+set movimento = True.
+set luz = 20.
+
+se movimento == True && luz < 50 entao
+    ligar lampada.
+.
